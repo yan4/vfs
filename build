@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo rmmod vfs
+echo "#define BUILD_TIME \"$(date +%R)\"" > build_time.h
+make -C /usr/src/linux-headers-$(uname -r) M=$PWD && sudo rmmod vfs 
+sudo insmod vfs.ko && dmesg|tail
